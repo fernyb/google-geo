@@ -1,9 +1,6 @@
-require 'test/unit'
-$:.unshift "#{File.dirname __FILE__}/../vendor/mocha-0.4.0/lib"
-require 'mocha'
-require "#{File.dirname __FILE__}/../lib/google/geo"
+require "test_helper"
 
-class Google::GeoTest < Test::Unit::TestCase  
+class GeoTest < Test::Unit::TestCase  
   def setup    
     @geo = Google::Geo.new 'API_KEY'
   end
