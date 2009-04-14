@@ -1,4 +1,5 @@
 CHANGELOG
+google-geo.gemspec
 lib/google/geo/address/street_view.rb
 lib/google/geo/address.rb
 lib/google/geo/params.rb
@@ -24,7 +25,6 @@ test/fixtures/too_many_queries.xml
 test/fixtures/unavailable_address.xml
 test/fixtures/unknown_address.xml
 test/geo_test.rb
-test/locate_street_view_test.rb
 test/reverse_locate_test.rb
 test/test_helper.rb
 vendor/mocha-0.4.0/COPYING
