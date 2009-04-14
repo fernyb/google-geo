@@ -26,25 +26,18 @@ In the case of sufficiently vague queries, Google::Geo will return more than one
 
 You can reverse geocode:
 
-  geo = Google::Geo.new API_KEY
-  location = geo.reverse_locate(:lat => 33.998671, :lon => -118.075926).first
+  location = geo.locate(33.998671, -118.075926).first
   location.city          # => Pico Rivera
   location.state         # => CA
   location.zip           # => 90660
   location.country       # => US
   location.full_address  # => 4952-4958 Tobias Ave, Pico Rivera, CA 90660, USA
 
-You can locate street view
+You can optionally enable the ability to get street view embed HTML for an Address:
   
-  geo = Google::Geo.new API_KEY
   address = geo.locate('1600 Amphitheatre Parkway, Mountain View, CA').first
-  address.street_view   # => Returns an HTML Flash Embed Tag to display street view
+  address.street_view_html # => Returns an HTML Flash Embed Tag to display street view
   
-
-  geo = Google::Geo.new API_KEY
-  location = geo.reverse_locate(:lat => 33.998671, :lon => -118.075926).first
-  location.street_view  # => Returns street view for location
-
 h2. Options
 
 If you need to get the results in another language, you can set it like so:
@@ -57,9 +50,9 @@ where the language code can be anything listed on http://spreadsheets.google.com
 h2. Contributors
 
 * Seth Thomas Rasmussen - "http://greatseth.com":http://greatseth.com
-* Fernando Barajas - "http://fernyb.net":http://fernyb.net
-* Peter Gassner - "http://www.naehrstoff.ch":http://www.naehrstoff.ch
+* Fernando Barajas      - "http://fernyb.net":http://fernyb.net
+* Peter Gassner         - "http://www.naehrstoff.ch":http://www.naehrstoff.ch
 
 h2. License
 
-(c) 2007-2008 Seth Thomas Rasmussen and released under the WTFPL. See the LICENSE file for details.
+(c) 2007-2009 Seth Thomas Rasmussen and released under the WTFPL. See the LICENSE file for details.
