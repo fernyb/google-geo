@@ -3,7 +3,7 @@ h1. Google::Geo
 A simple, elegant library for getting geocoding information from Google Maps. Very much inspired by the google-geocode gem, but completely dependency free!
 
 h2. Examples
-  
+
   geo = Google::Geo.new API_KEY
   
   addresses = geo.locate '1600 Amphitheatre Parkway, Mountain View, CA'
@@ -16,13 +16,12 @@ h2. Examples
   address.query        # '1600 Amphitheatre Parkway, Mountain View, CA'
   address.accuracy     # 8
   address.coordinates  # [-122.084143, 37.421972, 0.0]
-  
+
 In the case of sufficiently vague queries, Google::Geo will return more than one:
-  
+
   addresses = geo.locate 'hell'
   addresses.size                # 2
   addresses.map { |a| a.state } # ['PA', 'NC']
-
 
 You can reverse geocode:
 
@@ -34,18 +33,19 @@ You can reverse geocode:
   location.full_address  # => 4952-4958 Tobias Ave, Pico Rivera, CA 90660, USA
 
 You can optionally enable the ability to get street view embed HTML for an Address:
-  
+
+  require "google/geo/address/street_view"
   address = geo.locate('1600 Amphitheatre Parkway, Mountain View, CA').first
-  address.street_view_html # => Returns an HTML Flash Embed Tag to display street view
-  
+  address.street_view_html # => Returns an HTML Embed Tag to display street view
+
 h2. Options
 
 If you need to get the results in another language, you can set it like so:
 
-  geo = Google::Geo.new API_KEY
-  geo.language = 'de'
+  geo = Google::Geo.new API_KEY, "de"
+  geo.language = "en"
 
-where the language code can be anything listed on http://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1
+The language code can be anything listed on "http://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1":http://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1.
 
 h2. Contributors
 
