@@ -25,18 +25,17 @@ In the case of sufficiently vague queries, Google::Geo will return more than one
 
 You can reverse geocode:
 
-  location = geo.locate(33.998671, -118.075926).first
-  location.city          # => Pico Rivera
-  location.state         # => CA
-  location.zip           # => 90660
-  location.country       # => US
-  location.full_address  # => 4952-4958 Tobias Ave, Pico Rivera, CA 90660, USA
+  address = geo.locate(33.998671, -118.075926).first
+  address.city          # => Pico Rivera
+  address.state         # => CA
+  address.zip           # => 90660
+  address.country       # => US
+  address.full_address  # => 4952-4958 Tobias Ave, Pico Rivera, CA 90660, USA
 
 You can optionally enable the ability to get street view embed HTML for an Address:
 
   require "google/geo/address/street_view"
-  address = geo.locate('1600 Amphitheatre Parkway, Mountain View, CA').first
-  address.street_view_html # => Returns an HTML Embed Tag to display street view
+  address.street_view_html :id => :street_view, :style => "width:640px; height:480px"
 
 h2. Options
 
