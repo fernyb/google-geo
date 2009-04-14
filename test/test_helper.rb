@@ -8,3 +8,16 @@ end
 require "test/unit"
 require "mocha"
 require "google/geo"
+
+begin; require "rubygems"; require "redgreen"; rescue LoadError; end
+
+class Test::Unit::TestCase
+  def response(filename)
+    File.open "#{File.dirname __FILE__}/fixtures/#{filename}.xml"
+  end
+  
+  def stub_response!(name)
+    Google::Geo::Response.any_instance.
+      expects(:open).returns(response(name))
+  end
+end

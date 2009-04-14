@@ -1,7 +1,6 @@
-require 'test/unit'
-$:.unshift "#{File.dirname __FILE__}/../vendor/mocha-0.4.0/lib"
-require 'mocha'
-require "#{File.dirname __FILE__}/../lib/google/geo"
+__END__
+
+require "test_helper"
 
 class Google::GeoTest < Test::Unit::TestCase  
   def setup    
@@ -10,10 +9,10 @@ class Google::GeoTest < Test::Unit::TestCase
     
   def test_streetview_should_not_be_nil
      @geo.expects(:open).
-       with("http://maps.google.com/cbk?output=xml&oe=utf-8&cb_client=api&ll=34.154961,-118.25514&callback=_xdc_._0fqdyf9p2").
+       # with("http://maps.google.com/cbk?output=xml&oe=utf-8&cb_client=api&ll=34.154961,-118.25514&callback=_xdc_._0fqdyf9p2").
        returns(response(:streetview_success))
     
-    street = @geo.street_view_locate({:lat => 34.154961, :lon => -118.25514})
+    street = @geo.locate(:lat => 34.154961, :lng => -118.25514)
     assert_not_nil street
   end
   
@@ -22,7 +21,7 @@ class Google::GeoTest < Test::Unit::TestCase
      with("http://maps.google.com/cbk?output=xml&oe=utf-8&cb_client=api&ll=34.154961,-118.25514&callback=_xdc_._0fqdyf9p2").
      returns(response(:streetview_success))
     
-    street = @geo.street_view_locate({:lat => 34.154961, :lon => -118.25514})
+    street = @geo.locate(:lat => 34.154961, :lng => -118.25514)
     assert_not_nil street.scan(/\<embed.*\>.*\<\/embed\>/)
     assert_not_nil street.scan(/panoId=([a-zA-Z0-9\-_]+)/)
   end
@@ -30,9 +29,9 @@ class Google::GeoTest < Test::Unit::TestCase
   def test_reverse_location_should_have_streetview
     @geo.expects(:open).
      with("http://maps.google.com/maps/geo?ll=34.154961,-118.25514&key=API_KEY&output=xml&hl=en&oe=utf-8").
-     returns(response(:reverse_locate_success))
+     returns(response(:locate_success))
     
-    location = @geo.reverse_locate(:lat => 34.154961, :lon => -118.25514).first
+    location = @geo.locate(:lat => 34.154961, :lon => -118.25514).first
   
     Google::Geo.any_instance.expects(:open).
      with("http://maps.google.com/cbk?output=xml&oe=utf-8&cb_client=api&ll=33.9986972,-118.0760384&callback=_xdc_._0fqdyf9p2").
@@ -58,10 +57,5 @@ class Google::GeoTest < Test::Unit::TestCase
     assert_not_nil address.street_view
     assert_not_nil address.street_view.scan(/\<embed.*\>.*\<\/embed\>/)
     assert_not_nil address.street_view.scan(/panoId=([a-zA-Z0-9\-_]+)/)
-  end
-  
-private
-  def response(filename)
-    File.new "#{File.dirname __FILE__}/fixtures/#{filename}.xml"
   end
 end

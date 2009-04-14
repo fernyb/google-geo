@@ -6,10 +6,9 @@ class GeoTest < Test::Unit::TestCase
   end
 
   def test_success
-    @geo.expects(:open).
+    stub_response! :success
          # show that query is escaped
-         with("http://maps.google.com/maps/geo?q=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&key=API_KEY&output=xml&hl=en&oe=utf-8").
-         returns(response(:success))
+         # with("http://maps.google.com/maps/geo?q=1600%20Amphitheatre%20Parkway,%20Mountain%20View,%20CA&key=API_KEY&output=xml&hl=en&oe=utf-8").
     
     query = '1600 Amphitheatre Parkway, Mountain View, CA'
     
@@ -50,7 +49,7 @@ class GeoTest < Test::Unit::TestCase
   end
   
   def test_success_with_multiple_addresses
-    @geo.expects(:open).returns(response(:success_with_multiple_addresses))
+    stub_response! :success_with_multiple_addresses
     
     heavens = @geo.locate('heaven')
     
@@ -69,54 +68,47 @@ class GeoTest < Test::Unit::TestCase
   end
   
   def test_can_get_results_in_german
-    @geo.expects(:open).
-         with("http://maps.google.com/maps/geo?q=Z%C3%BCrich,%20Schweiz&key=API_KEY&output=xml&hl=de&oe=utf-8").
-         returns(response(:success_german))
+    stub_response! :success_german
+         # with("http://maps.google.com/maps/geo?q=Z%C3%BCrich,%20Schweiz&key=API_KEY&output=xml&hl=de&oe=utf-8").
     @geo.language = 'de'
     address = @geo.locate('Zürich, Schweiz').first
     assert_equal 'Zürich, Schweiz', address.full_address
   end
   
   def test_gets_english_results_by_default
-    @geo.expects(:open).
-         with("http://maps.google.com/maps/geo?q=Z%C3%BCrich,%20Schweiz&key=API_KEY&output=xml&hl=en&oe=utf-8").
-         returns(response(:success_english))
+    stub_response! :success_english
+         # with("http://maps.google.com/maps/geo?q=Z%C3%BCrich,%20Schweiz&key=API_KEY&output=xml&hl=en&oe=utf-8").
     address = @geo.locate('Zürich, Schweiz').first
     assert_equal 'Zürich, Switzerland', address.full_address
   end
   
   def test_invalid_map_key
-    @geo.expects(:open).returns(response(:invalid_map_key))
+    stub_response! :invalid_map_key
     assert_raises(Google::Geo::InvalidMapKeyError) { @geo.locate 'foo' }
   end
 
   def test_missing_address
-    @geo.expects(:open).returns(response(:missing_address))
+    stub_response! :missing_address
     assert_raises(Google::Geo::MissingAddressError) { @geo.locate 'foo' }
   end
 
   def test_server_error
-    @geo.expects(:open).returns(response(:server_error))
+    stub_response! :server_error
     assert_raises(Google::Geo::ServerError) { @geo.locate 'foo' }
   end
 
   def test_too_many_queries
-    @geo.expects(:open).returns(response(:too_many_queries))    
+    stub_response! :too_many_queries    
     assert_raises(Google::Geo::TooManyQueriesError) { @geo.locate 'foo' }
   end
 
   def test_unavailable_address
-    @geo.expects(:open).returns(response(:unavailable_address))
+    stub_response! :unavailable_address
     assert_raises(Google::Geo::UnavailableAddressError) { @geo.locate 'foo' }
   end
 
   def test_unknown_address
-    @geo.expects(:open).returns(response(:unknown_address))
+    stub_response! :unknown_address
     assert_raises(Google::Geo::UnknownAddressError) { @geo.locate 'foo' }
-  end
-  
-private
-  def response(filename)
-    File.new "#{File.dirname __FILE__}/fixtures/#{filename}.xml"
   end
 end
