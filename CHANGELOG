@@ -1,3 +1,5 @@
+v2.3. Fixed a bug with parsing accuracy. Thanks to David Vrensk!
+
 v2.2. Added reverse locate and optional street view embed features. Thanks to Fernando Barajas and Peter Gassner!
 
 v2.1. Added a LICENSE and RubyForge publishing support. Fixed Rakefile.

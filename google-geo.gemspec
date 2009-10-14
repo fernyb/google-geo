@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{google-geo}
-  s.version = "2.2"
+  s.version = "2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Seth Thomas Rasmussen"]
-  s.date = %q{2009-09-20}
+  s.date = %q{2009-10-14}
   s.description = %q{A simple, elegant library for getting geocoding information from Google Maps. Very much inspired by the google-geocode gem, but completely dependency free!
 }
   s.email = %q{sethrasmussen@gmail.com}
