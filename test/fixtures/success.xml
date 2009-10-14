@@ -8,7 +8,7 @@
     </Status>
     <Placemark>
       <address>1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA</address>
-      <AddressDetails xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0" Accuracy="8">
+      <AddressDetails xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0" Accuracy="8" foo="bar">
         <Country>
           <CountryNameCode>US</CountryNameCode>
           <AdministrativeArea>

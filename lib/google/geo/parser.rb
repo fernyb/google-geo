@@ -10,7 +10,7 @@ module Parser
   
   # Like fetch, but for the only piece of data locked away in an attribute.
   def fetch_accuracy
-    @xml.slice(%r{Accuracy="([^"]+)">}, 1).to_i
+    @xml.slice(%r{Accuracy="([^"]+)"}, 1).to_i
   end
 end
 
