@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Seth Thomas Rasmussen"]
-  s.date = %q{2009-10-14}
+  s.date = %q{2009-11-18}
   s.description = %q{A simple, elegant library for getting geocoding information from Google Maps. Very much inspired by the google-geocode gem, but completely dependency free!
 }
   s.email = %q{sethrasmussen@gmail.com}
