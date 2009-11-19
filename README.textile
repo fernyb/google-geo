@@ -2,6 +2,10 @@ h1. Google::Geo
 
 A simple, elegant library for getting geocoding information from Google Maps. Very much inspired by the google-geocode gem, but completely dependency free!
 
+h2. Installation
+  
+  $ gem install google-geo -s http://gemcutter.org
+  
 h2. Examples
 
   geo = Google::Geo.new API_KEY
